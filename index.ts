@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: './.env' })
 const axios = require('axios').default;
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, printf } = format;
