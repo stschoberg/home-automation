@@ -62,8 +62,6 @@ export const hueService = (dependencies: dependencies) => {
     }
 
     async function updateLightState(light: light) {
-        console.log(light.id)
-        console.log(light.state)
         try {
             const resp = await axios({
                 method: 'put',

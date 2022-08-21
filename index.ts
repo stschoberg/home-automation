@@ -31,7 +31,6 @@ async function main(){
         PIHOLE_TOKEN: process.env.PIHOLE_TOKEN!
     }
     const hue = hueService({logger: logger, env: env})
-
     const queries = await getAllQueries(process.env.HOSTNAME!)
     const mostRecentQuery = queries[queries.length - 1];
     const mostRecentQueryTimestamp = new Date(mostRecentQuery[0] * 1000)
