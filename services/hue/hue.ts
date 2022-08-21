@@ -60,8 +60,6 @@ export const hueService = (dependencies: dependencies) => {
 
     async function updateLightState(light: light) {
         try {
-            console.log(light.id)
-            console.log(light.state)
             const resp = await axios({
                 method: 'put',
                 url: `http://192.168.1.172/api/${env.HUE_USER}/lights/${light.id}/state`,
