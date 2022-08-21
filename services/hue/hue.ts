@@ -1,8 +1,6 @@
-import { Logger } from "winston";
-
 const axios = require('axios').default;
 type dependencies = {
-    logger: Logger
+    logger: {error: (string) => void}
     env: {HUE_USER: string, BRIDGE_IP: string}
 }
 type state = {
@@ -19,8 +17,7 @@ type light = {
 }
 
 export const hueService = (dependencies: dependencies) => {
-    const logger = dependencies.logger;
-
+    const {env, logger} = dependencies;
     async function flipAllLights(state?: 'on' | 'off') {
         let lights = await getAllLights()
         const resp = lights.forEach((light) => {
@@ -46,7 +43,7 @@ export const hueService = (dependencies: dependencies) => {
         try {
             const resp = await axios({
                 method: 'get',
-                url: `http://192.168.1.172/api/${process.env.HUE_USER}/lights`
+                url: `http://192.168.1.172/api/${env.HUE_USER}/lights`
             })
 
             for (const lightId in resp.data) {
@@ -65,7 +62,7 @@ export const hueService = (dependencies: dependencies) => {
         try {
             const resp = await axios({
                 method: 'put',
-                url: `http://192.168.1.172/api/${process.env.HUE_USER}/lights/${light.id}/state`,
+                url: `http://192.168.1.172/api/${env.HUE_USER}/lights/${light.id}/state`,
                 headers: {}, 
                 data: light.state
         })

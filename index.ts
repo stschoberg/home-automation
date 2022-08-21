@@ -2,7 +2,7 @@ require('dotenv').config({ path: './.env' })
 import { hueService } from "./services/hue/hue";
 import { getAllQueries } from "./services/pihole/pihole";
 const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, label, printf } = format;
+const { combine, timestamp, printf } = format;
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} ${level}: ${message}`;
