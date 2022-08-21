@@ -29,10 +29,12 @@ async function main(){
     const mostRecentQuery = queries[queries.length - 1];
     const mostRecentQueryTimestamp = new Date(mostRecentQuery[0] * 1000)
     const isActive =  Math.abs((new Date()).valueOf() - mostRecentQueryTimestamp.valueOf()) < 1000 * 60 * 5;
+    console.log(`${process.env.HOSTNAME} last activity: ${mostRecentQueryTimestamp}`)
     if(isActive) {
-        console.log("Active")
+        console.log(`${process.env.HOSTNAME} is active on the network`)
         await updateLightState(3, {on: true})
     } else {
+        console.log(`${process.env.HOSTNAME} is inactive on the network`)
         await updateLightState(3, {on: false})
     }
 
